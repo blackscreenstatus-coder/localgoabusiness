@@ -85,7 +85,7 @@
     --font: 'Inter', system-ui, sans-serif;
     --font-h: 'Space Grotesk', 'Inter', sans-serif;
     --ease: cubic-bezier(0.4, 0, 0.2, 1);
-    --header-h: 60px;
+    --header-h: 78px;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -105,14 +105,15 @@ ul{list-style:none}
 /* ===== HEADER ===== */
 .site-header{position:sticky;top:0;z-index:1000;background:var(--white);height:var(--header-h);display:flex;align-items:center;border-bottom:1px solid var(--border);box-shadow:var(--shadow-1)}
 .header-inner{display:flex;align-items:center;justify-content:space-between;width:100%}
-.logo-link{display:flex;align-items:center;gap:8px;font-family:var(--font-h);font-weight:800;font-size:1.1rem;color:var(--dark)}
-.logo-link img{height:34px;border-radius:var(--r-xs)}
-.logo-link:hover{color:var(--blue)}
+.logo-link{display:flex;align-items:center;gap:8px}
+.logo-link img{height:54px;width:auto;border-radius:var(--r-xs)}
+.logo-link:hover{opacity:.85}
 .nav-main{display:flex;align-items:center;gap:4px}
-.nav-main a{padding:7px 14px;border-radius:var(--r-full);font-weight:500;font-size:.875rem;color:var(--text-2)}
+.nav-main a{padding:8px 15px;border-radius:var(--r-full);font-weight:500;font-size:.875rem;color:var(--text-2)}
 .nav-main a:hover,.nav-main a.active{background:var(--blue-light);color:var(--blue)}
-.header-cta{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;background:var(--dark);color:#fff;border-radius:var(--r-full);font-weight:600;font-size:.813rem;box-shadow:var(--shadow-2)}
-.header-cta:hover{background:var(--dark-2);color:#fff;transform:translateY(-1px);box-shadow:var(--shadow-3)}
+.header-cta{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;background:linear-gradient(135deg,#10b981,#059669);color:#fff;border-radius:var(--r-full);font-weight:700;font-size:.875rem;box-shadow:0 4px 14px rgba(16,185,129,.4)}
+.header-cta i{font-size:.85rem}
+.header-cta:hover{background:linear-gradient(135deg,#059669,#047857);color:#fff;transform:translateY(-2px);box-shadow:0 6px 20px rgba(16,185,129,.5)}
 .mobile-toggle{display:none;background:none;border:none;font-size:1.3rem;color:var(--dark);cursor:pointer;padding:8px}
 
 /* ===== BREADCRUMB ===== */
@@ -192,12 +193,38 @@ ul{list-style:none}
 .card-head i{color:var(--blue);font-size:.938rem}
 
 /* ===== GALLERY ===== */
-.gallery{display:grid;grid-template-columns:1.8fr 1fr;grid-template-rows:190px 190px;gap:6px;border-radius:var(--r-md);overflow:hidden}
-.gallery-item{position:relative;overflow:hidden}
-.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
-.gallery-item:hover img{transform:scale(1.06)}
-.gallery-item:first-child{grid-row:1/3}
-.photo-badge{position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,.65);color:#fff;padding:4px 10px;border-radius:var(--r-full);font-size:.7rem;font-weight:600;backdrop-filter:blur(6px)}
+.gallery{display:grid;grid-template-columns:1.8fr 1fr;grid-template-rows:190px 190px;gap:8px;border-radius:var(--r-md);overflow:hidden}
+.gallery-main{position:relative;overflow:hidden;grid-row:1/3;cursor:pointer;border-radius:var(--r-sm)}
+.gallery-main img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.gallery-main:hover img{transform:scale(1.06)}
+.gallery-main::after{content:'\f00e';font-family:'Font Awesome 6 Free';font-weight:900;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.8);width:46px;height:46px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.92);color:var(--dark);border-radius:50%;opacity:0;transition:all .3s;font-size:1rem}
+.gallery-main:hover::after{opacity:1;transform:translate(-50%,-50%) scale(1)}
+/* Vertical carousel for small photos */
+.gallery-carousel{position:relative;overflow:hidden;border-radius:var(--r-sm);background:var(--bg);grid-row:1/3}
+.carousel-track{display:flex;flex-direction:column;gap:8px;animation:scrollUp 12s linear infinite}
+.gallery-carousel:hover .carousel-track{animation-play-state:paused}
+.carousel-slide{position:relative;flex-shrink:0;height:372px;cursor:pointer;overflow:hidden;border-radius:var(--r-sm)}
+.carousel-slide img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.carousel-slide:hover img{transform:scale(1.06)}
+@keyframes scrollUp{0%{transform:translateY(0)}100%{transform:translateY(calc(-50% - 4px))}}
+.photo-badge{position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,.7);color:#fff;padding:4px 10px;border-radius:var(--r-full);font-size:.7rem;font-weight:600;backdrop-filter:blur(6px);z-index:2}
+
+/* ===== LIGHTBOX ===== */
+.lightbox{position:fixed;inset:0;z-index:9999;background:rgba(15,23,42,.96);display:none;align-items:center;justify-content:center;backdrop-filter:blur(8px)}
+.lightbox.open{display:flex;animation:fadeIn .3s}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.lb-content{position:relative;max-width:90vw;max-height:90vh;display:flex;flex-direction:column;align-items:center;animation:zoomIn .3s var(--ease)}
+@keyframes zoomIn{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+.lb-img{max-width:90vw;max-height:78vh;border-radius:var(--r-md);box-shadow:0 20px 60px rgba(0,0,0,.5);object-fit:contain}
+.lb-caption{margin-top:14px;color:#fff;font-size:.95rem;text-align:center;font-weight:500;max-width:600px;padding:0 20px}
+.lb-counter{color:rgba(255,255,255,.6);font-size:.8rem;margin-top:6px}
+.lb-close{position:absolute;top:18px;right:18px;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .25s;z-index:2}
+.lb-close:hover{background:var(--red);transform:rotate(90deg)}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2);font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .25s;z-index:2}
+.lb-nav:hover{background:var(--blue)}
+.lb-prev{left:18px}
+.lb-next{right:18px}
+@media(max-width:768px){.lb-nav{width:42px;height:42px;font-size:1.1rem}.lb-prev{left:8px}.lb-next{right:8px}.lb-close{top:10px;right:10px}}
 
 /* ===== ABOUT ===== */
 .article-text{font-size:.9rem;color:var(--text-2);line-height:1.85}
@@ -264,9 +291,10 @@ ul{list-style:none}
 
 /* ===== SIDEBAR ===== */
 .sidebar{position:sticky;top:calc(var(--header-h) + 52px)}
-.side-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);padding:18px;margin-bottom:18px;box-shadow:var(--shadow-1)}
-.side-card h3{font-size:.875rem;margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid var(--blue-light);display:flex;align-items:center;gap:7px}
-.side-card h3 i{color:var(--blue);font-size:.813rem}
+.side-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r-lg);margin-bottom:18px;box-shadow:var(--shadow-1);overflow:hidden}
+.side-card h3{font-size:.875rem;margin:0;padding:13px 16px;background:linear-gradient(135deg,var(--dark),var(--dark-3));color:#fff;display:flex;align-items:center;gap:8px}
+.side-card h3 i{color:var(--accent);font-size:.875rem}
+.side-card-body{padding:14px 16px}
 /* Contact */
 .ct-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border-2);font-size:.813rem}
 .ct-row:last-child{border:none}
@@ -344,8 +372,9 @@ a.ct-val:hover{color:var(--blue)}
 .nav-main{display:none}
 .mobile-toggle{display:block}
 .svc-grid{grid-template-columns:repeat(2,1fr)}
-.gallery{grid-template-columns:1fr;grid-template-rows:200px 140px}
-.gallery-item:first-child{grid-row:auto}
+.gallery{grid-template-columns:1fr;grid-template-rows:240px 240px}
+.gallery-main{grid-row:auto}
+.carousel-slide{height:240px}
 .rev-summary{flex-direction:column;text-align:center}
 .sidebar{grid-template-columns:1fr}
 .ft-grid{grid-template-columns:1fr}
@@ -375,7 +404,7 @@ a.ct-val:hover{color:var(--blue)}
 <!-- HEADER -->
 <header class="site-header">
 <div class="container"><div class="header-inner">
-<a href="https://www.goa.sanctify.in/" class="logo-link"><img src="https://www.goa.sanctify.in/images/sanctify-logo.jpg" alt="Goa Business Directory" width="120" height="34">Goa Directory</a>
+<a href="https://www.goa.sanctify.in/" class="logo-link" aria-label="Goa Business Directory - Sanctify Home"><img src="https://www.goa.sanctify.in/images/sanctify-logo.jpg" alt="Sanctify Goa Business Directory Logo" width="170" height="54"></a>
 <nav class="nav-main" aria-label="Main"><a href="https://www.goa.sanctify.in/">Home</a><a href="https://www.goa.sanctify.in/about">About</a><a href="https://www.goa.sanctify.in/listings" class="active">Listings</a><a href="https://www.goa.sanctify.in/contact">Contact</a><a href="tel:+919923352923" class="header-cta"><i class="fas fa-phone"></i> +91 99233 52923</a></nav>
 <button class="mobile-toggle" aria-label="Menu"><i class="fas fa-bars"></i></button>
 </div></div>
@@ -448,9 +477,16 @@ a.ct-val:hover{color:var(--blue)}
 <section id="photos" class="card">
 <div class="card-head"><i class="fas fa-images"></i><h2>Photos</h2></div>
 <div class="gallery">
-<div class="gallery-item"><img src="https://www.goa.sanctify.in/images/product_item/sanctify-digital-marketing-agency-goa.jpg" alt="Sanctify Digital Marketing Agency workspace in Goa" loading="lazy"></div>
-<div class="gallery-item"><img src="https://www.goa.sanctify.in/images/product_item/sanctify-search-engine-optimization-company-goa.jpg" alt="SEO analytics at Sanctify" loading="lazy"></div>
-<div class="gallery-item"><img src="https://www.goa.sanctify.in/images/product_item/sanctify-advertising-agency-in-goa.jpg" alt="Branding work by Sanctify" loading="lazy"><span class="photo-badge"><i class="fas fa-camera"></i> 3+</span></div>
+<div class="gallery-main" onclick="openLightbox(0)" tabindex="0" role="button" aria-label="View Sanctify Digital Marketing Agency main photo in full screen"><img src="https://www.goa.sanctify.in/images/product_item/sanctify-digital-marketing-agency-goa.jpg" alt="Sanctify Digital Marketing Agency Goa - Creative advertising and marketing services" loading="lazy"></div>
+<div class="gallery-carousel" aria-label="Photo carousel">
+<div class="carousel-track">
+<div class="carousel-slide" onclick="openLightbox(1)" tabindex="0" role="button" aria-label="View SEO services photo"><img src="https://www.goa.sanctify.in/images/product_item/sanctify-search-engine-optimization-company-goa.jpg" alt="Sanctify SEO - Search Engine Optimization Company in Goa"></div>
+<div class="carousel-slide" onclick="openLightbox(2)" tabindex="0" role="button" aria-label="View advertising and branding photo"><img src="https://www.goa.sanctify.in/images/product_item/sanctify-advertising-agency-in-goa.jpg" alt="Sanctify Advertising Agency Goa - Social Media, Branding, Web Design"><span class="photo-badge"><i class="fas fa-camera"></i> 3+</span></div>
+<!-- duplicate for seamless loop -->
+<div class="carousel-slide" onclick="openLightbox(1)" tabindex="0" role="button" aria-label="View SEO services photo"><img src="https://www.goa.sanctify.in/images/product_item/sanctify-search-engine-optimization-company-goa.jpg" alt="Sanctify SEO - Search Engine Optimization Company in Goa"></div>
+<div class="carousel-slide" onclick="openLightbox(2)" tabindex="0" role="button" aria-label="View advertising and branding photo"><img src="https://www.goa.sanctify.in/images/product_item/sanctify-advertising-agency-in-goa.jpg" alt="Sanctify Advertising Agency Goa - Social Media, Branding, Web Design"></div>
+</div>
+</div>
 </div>
 </section>
 
@@ -521,18 +557,18 @@ a.ct-val:hover{color:var(--blue)}
 <section id="tags" class="card">
 <div class="card-head"><i class="fas fa-tags"></i><h2>Related Tags</h2></div>
 <div class="tags-wrap">
-<a href="#" class="tag"><i class="fas fa-tag"></i> Digital Marketing Agency Goa</a>
-<a href="#" class="tag"><i class="fas fa-tag"></i> SEO Company Goa</a>
-<a href="#" class="tag"><i class="fas fa-tag"></i> Social Media Marketing Goa</a>
-<a href="#" class="tag"><i class="fas fa-tag"></i> Web Design Company Vasco</a>
-<a href="#" class="tag"><i class="fas fa-tag"></i> PPC Agency Goa</a>
-<a href="#" class="tag"><i class="fas fa-tag"></i> Digital Marketing South Goa</a>
-<a href="#" class="tag"><i class="fas fa-tag"></i> Best Marketing Company Goa</a>
-<a href="#" class="tag"><i class="fas fa-tag"></i> Online Marketing Goa</a>
-<a href="#" class="tag"><i class="fas fa-tag"></i> Content Marketing Goa</a>
-<a href="#" class="tag"><i class="fas fa-tag"></i> Branding Agency Goa</a>
-<a href="#" class="tag"><i class="fas fa-tag"></i> Google Ads Expert Goa</a>
-<a href="#" class="tag"><i class="fas fa-tag"></i> Email Marketing Goa</a>
+<a href="#" class="tag" title="Digital Marketing Agency in Goa - Sanctify" aria-label="Digital Marketing Agency in Goa"><i class="fas fa-tag"></i> Digital Marketing Agency Goa</a>
+<a href="#" class="tag" title="Best SEO Company in Goa for local search ranking" aria-label="SEO Company in Goa"><i class="fas fa-tag"></i> SEO Company Goa</a>
+<a href="#" class="tag" title="Social Media Marketing services in Goa - Facebook, Instagram, LinkedIn" aria-label="Social Media Marketing Goa"><i class="fas fa-tag"></i> Social Media Marketing Goa</a>
+<a href="#" class="tag" title="Web Design and Development Company in Vasco, Goa" aria-label="Web Design Company Vasco Goa"><i class="fas fa-tag"></i> Web Design Company Vasco</a>
+<a href="#" class="tag" title="PPC and Google Ads management agency in Goa" aria-label="PPC Agency Goa"><i class="fas fa-tag"></i> PPC Agency Goa</a>
+<a href="#" class="tag" title="Digital Marketing services in South Goa" aria-label="Digital Marketing South Goa"><i class="fas fa-tag"></i> Digital Marketing South Goa</a>
+<a href="#" class="tag" title="Best Marketing Company in Goa since 2012" aria-label="Best Marketing Company Goa"><i class="fas fa-tag"></i> Best Marketing Company Goa</a>
+<a href="#" class="tag" title="Online Marketing and lead generation in Goa" aria-label="Online Marketing Goa"><i class="fas fa-tag"></i> Online Marketing Goa</a>
+<a href="#" class="tag" title="Content Marketing and copywriting services in Goa" aria-label="Content Marketing Goa"><i class="fas fa-tag"></i> Content Marketing Goa</a>
+<a href="#" class="tag" title="Branding and graphic design agency in Goa" aria-label="Branding Agency Goa"><i class="fas fa-tag"></i> Branding Agency Goa</a>
+<a href="#" class="tag" title="Google Ads certified expert in Goa" aria-label="Google Ads Expert Goa"><i class="fas fa-tag"></i> Google Ads Expert Goa</a>
+<a href="#" class="tag" title="Email Marketing and automation services in Goa" aria-label="Email Marketing Goa"><i class="fas fa-tag"></i> Email Marketing Goa</a>
 </div>
 </section>
 
@@ -544,16 +580,19 @@ a.ct-val:hover{color:var(--blue)}
 <!-- Contact -->
 <div class="side-card">
 <h3><i class="fas fa-address-card"></i> Contact Info</h3>
+<div class="side-card-body">
 <div class="ct-row"><div class="ct-icon"><i class="fas fa-phone"></i></div><div><div class="ct-label">Phone</div><a href="tel:+919923352923" class="ct-val">+91 9923352923</a></div></div>
 <div class="ct-row"><div class="ct-icon"><i class="fab fa-whatsapp"></i></div><div><div class="ct-label">WhatsApp</div><a href="https://wa.me/919923352923" target="_blank" rel="noopener" class="ct-val">+91 9923352923</a></div></div>
 <div class="ct-row"><div class="ct-icon"><i class="fas fa-envelope"></i></div><div><div class="ct-label">Email</div><a href="mailto:help@sanctify.in" class="ct-val">help@sanctify.in</a></div></div>
 <div class="ct-row"><div class="ct-icon"><i class="fas fa-globe"></i></div><div><div class="ct-label">Website</div><a href="https://www.sanctify.in" target="_blank" rel="noopener" class="ct-val">www.sanctify.in</a></div></div>
 <div class="ct-row"><div class="ct-icon"><i class="fas fa-map-marker-alt"></i></div><div><div class="ct-label">Address</div><span class="ct-val">Zuarinagar, Dabolim<br>Vasco, Goa 403726</span></div></div>
 </div>
+</div>
 
 <!-- Hours -->
 <div class="side-card">
 <h3><i class="far fa-clock"></i> Business Hours</h3>
+<div class="side-card-body">
 <div class="open-pill">Open Now</div>
 <div class="hrs-row"><span class="day">Monday</span><span class="time">9:00 AM - 5:00 PM</span></div>
 <div class="hrs-row"><span class="day">Tuesday</span><span class="time">9:00 AM - 5:00 PM</span></div>
@@ -563,17 +602,21 @@ a.ct-val:hover{color:var(--blue)}
 <div class="hrs-row"><span class="day">Saturday</span><span class="time">9:00 AM - 5:00 PM</span></div>
 <div class="hrs-row"><span class="day">Sunday</span><span class="closed">Closed</span></div>
 </div>
+</div>
 
 <!-- Map -->
 <div class="side-card">
 <h3><i class="fas fa-map-marked-alt"></i> Location</h3>
+<div class="side-card-body">
 <div class="map-box"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3846.1!2d73.8113!3d15.3982!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sSanctify!5e0!3m2!1sen!2sin" loading="lazy" title="Sanctify Location"></iframe></div>
 <a href="https://g.page/sanctifygoa" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:6px;margin-top:8px;padding:9px;background:var(--bg);border:1px solid var(--border);border-radius:var(--r-xs);font-size:.75rem;font-weight:600;color:var(--text-2)"><i class="fas fa-directions" style="color:var(--blue)"></i> Open in Google Maps</a>
+</div>
 </div>
 
 <!-- BROWSE CATEGORIES -->
 <div class="side-card">
 <h3><i class="fas fa-th-list"></i> Browse Categories</h3>
+<div class="side-card-body">
 <ul class="cat-list">
 <li><a href="https://www.goa.sanctify.in/categories/accommodation-goa"><i class="fas fa-hotel"></i> Accommodation</a></li>
 <li><a href="https://www.goa.sanctify.in/categories/automobiles-goa"><i class="fas fa-car"></i> Automobiles</a></li>
@@ -588,16 +631,19 @@ a.ct-val:hover{color:var(--blue)}
 <li><a href="https://www.goa.sanctify.in/categories/spa-salon-goa"><i class="fas fa-spa"></i> Spa &amp; Salon</a></li>
 </ul>
 </div>
+</div>
 
 <!-- Social -->
 <div class="side-card">
 <h3><i class="fas fa-share-alt"></i> Follow Us</h3>
+<div class="side-card-body">
 <div class="social-row">
 <a href="https://www.facebook.com/sanctifygoa" class="social-btn fb" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
 <a href="https://twitter.com/sanctifygoa" class="social-btn tw" target="_blank" rel="noopener" aria-label="X"><i class="fab fa-x-twitter"></i></a>
 <a href="https://www.instagram.com/sanctifygoa/" class="social-btn ig" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
 <a href="https://www.linkedin.com/company/sanctify" class="social-btn li" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
 <a href="https://www.youtube.com/c/SanctifyGoa" class="social-btn yt" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+</div>
 </div>
 </div>
 </aside>
@@ -618,7 +664,33 @@ a.ct-val:hover{color:var(--blue)}
 
 <button class="back-top" id="backTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
 
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo gallery viewer">
+<button class="lb-close" onclick="closeLightbox()" aria-label="Close gallery">&times;</button>
+<button class="lb-nav lb-prev" onclick="lbNav(-1)" aria-label="Previous photo"><i class="fas fa-chevron-left"></i></button>
+<button class="lb-nav lb-next" onclick="lbNav(1)" aria-label="Next photo"><i class="fas fa-chevron-right"></i></button>
+<div class="lb-content">
+<img class="lb-img" id="lbImg" src="" alt="">
+<div class="lb-caption" id="lbCaption"></div>
+<div class="lb-counter" id="lbCounter"></div>
+</div>
+</div>
+
 <script>
+/* Lightbox gallery data */
+const lbData=[
+{src:"https://www.goa.sanctify.in/images/product_item/sanctify-digital-marketing-agency-goa.jpg",cap:"Sanctify - Digital Marketing Agency in Goa | FB Marketing, SEO & Website Designing"},
+{src:"https://www.goa.sanctify.in/images/product_item/sanctify-search-engine-optimization-company-goa.jpg",cap:"Sanctify SEO - Search Engine Optimization Company in Goa (www.sanctify.in)"},
+{src:"https://www.goa.sanctify.in/images/product_item/sanctify-advertising-agency-in-goa.jpg",cap:"Sanctify Advertising Agency - Social Media, Marketing, Branding & Media in Goa"}
+];
+let lbIndex=0;
+function openLightbox(i){lbIndex=i;updateLb();document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden'}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow=''}
+function lbNav(d){lbIndex=(lbIndex+d+lbData.length)%lbData.length;updateLb()}
+function updateLb(){const item=lbData[lbIndex];document.getElementById('lbImg').src=item.src;document.getElementById('lbImg').alt=item.cap;document.getElementById('lbCaption').textContent=item.cap;document.getElementById('lbCounter').textContent=(lbIndex+1)+' / '+lbData.length}
+document.getElementById('lightbox').addEventListener('click',function(e){if(e.target===this)closeLightbox()});
+document.addEventListener('keydown',function(e){if(!document.getElementById('lightbox').classList.contains('open'))return;if(e.key==='Escape')closeLightbox();if(e.key==='ArrowRight')lbNav(1);if(e.key==='ArrowLeft')lbNav(-1)});
+
 function toggleFaq(btn){const item=btn.parentElement;const open=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(f=>{f.classList.remove('open')});if(!open)item.classList.add('open')}
 function goTo(id){const el=document.getElementById(id);if(el){const off=document.querySelector('.site-header').offsetHeight+document.querySelector('.tab-bar').offsetHeight+16;window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-off,behavior:'smooth'})}document.querySelectorAll('.tab-btn').forEach(t=>t.classList.remove('active'));event.target.classList.add('active')}
 function shareThis(){if(navigator.share)navigator.share({title:'Sanctify - Digital Marketing Agency Goa',url:location.href});else{navigator.clipboard.writeText(location.href);alert('Link copied!')}}
