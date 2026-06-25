@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+Disallow: /cgi-bin/
+Disallow: /form_handler.php
+
+# Major AI / answer-engine crawlers are welcome
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+Sitemap: https://www.goa.sanctify.in/sitemap_index.xml
+Sitemap: https://www.goa.sanctify.in/sitemap.xml
