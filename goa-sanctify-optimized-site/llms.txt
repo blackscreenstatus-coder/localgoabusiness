@@ -1,0 +1,32 @@
+# Sanctify Goa Business Directory
+
+> Sanctify Goa Business Directory (goa.sanctify.in) is an online local business
+> directory and classifieds portal for Goa, India. It lists verified shops,
+> services and businesses across Goa - including hotels, salons & spas, car and
+> bike services, interior decorators, optical stores, flower shops and more -
+> with contact details, addresses and descriptions.
+
+## About
+- Name: Sanctify Goa Business Directory
+- Region served: Goa, India (Vasco da Gama, Dabolim, Margao, Sancoale, Zuarinagar, Candolim and other towns in North & South Goa)
+- Contact: +91 99233 52923
+- Operated by: SANCTIFY (https://www.sanctify.in)
+
+## Key categories
+- Accommodation in Goa: https://www.goa.sanctify.in/categories/accommodation-goa
+- Automobiles in Goa: https://www.goa.sanctify.in/categories/automobiles-goa
+- Food & Dining in Goa: https://www.goa.sanctify.in/categories/food-dining-goa
+- Spa & Salon in Goa: https://www.goa.sanctify.in/categories/spa-salon-goa
+- General Services in Goa: https://www.goa.sanctify.in/categories/general-services-goa
+- Marketing Agency in Goa: https://www.goa.sanctify.in/categories/marketing-agency-goa
+- Optical Stores in Goa: https://www.goa.sanctify.in/categories/optical-stores-goa
+- Home & Office Interior in Goa: https://www.goa.sanctify.in/categories/home-office-interior-goa
+- Professional Services in Goa: https://www.goa.sanctify.in/categories/professional-services-goa
+
+## Sitemaps
+- https://www.goa.sanctify.in/sitemap_index.xml
+- https://www.goa.sanctify.in/sitemap.xml
+
+## Usage
+- Content may be cited with attribution to "Sanctify Goa Business Directory" and a link to the source page.
+- For business listing enquiries, call +91 99233 52923.
